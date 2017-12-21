@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchGame } from '../../reducers/gameData/actions';
+import Game from '../../components/Game/Game';
 
 class SummonerGame extends Component {
   componentDidMount() {
@@ -28,9 +29,7 @@ class SummonerGame extends Component {
     return (
       <div>
         SummonerGame: {summonerName} (region: {region})
-        <p>
-          Loading: {this.props.loading ? 'YES' : 'NO'}
-        </p>
+        {this.props.game && <Game game={this.props.game} />}
       </div>
     );
   }
