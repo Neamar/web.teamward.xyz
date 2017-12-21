@@ -9,16 +9,14 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div>
-          <Header />
+      <div>
+        <Header />
 
-          <main>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/summoner/:name" component={SummonerGame} />
-          </main>
-        </div>
-      </Router>
+        <main>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/summoner/:name" component={SummonerGame} />
+        </main>
+      </div>
     );
   }
 }
