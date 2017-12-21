@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 class Home extends Component {
   addSummoner = (e) => {
     e.preventDefault();
-    console.log('THE SUMMONER IS', this.summonerNameEl.value, this.summonerRegionEl.value);
+    this.props.push(`${this.summonerRegionEl.value}/game/${this.summonerNameEl.value}`);
   }
 
   render() {
     return (
       <div>
-        <div>Home</div>
         <form onSubmit={this.addSummoner}>
           <h4>View your stats</h4>
           <input type="text" name="summoner" required placeholder="Your summoner name" ref={(el) => { this.summonerNameEl = el; }} />
@@ -35,4 +36,6 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect(null, {
+  push,
+})(Home);
