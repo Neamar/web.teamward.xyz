@@ -13,10 +13,10 @@ class SummonerGame extends Component {
   }
 
   fetchGameIfNecessary(props = this.props) {
-    if (props.loading || !props.gameOf) {
+    if (props.loading) {
       return;
     }
-    if (props.gameOf.name === props.match.params.name && props.gameOf.region === props.match.params.region) {
+    if (props.gameOf && props.gameOf.name === props.match.params.name && props.gameOf.region === props.match.params.region) {
       // same game
       return;
     }
