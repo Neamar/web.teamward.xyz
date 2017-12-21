@@ -13,7 +13,11 @@ class SummonerGame extends Component {
   }
 
   fetchGameIfNecessary(props = this.props) {
-    if (props.loading || props.game) {
+    if (props.loading || !props.gameOf) {
+      return;
+    }
+    if (props.gameOf.name === props.match.params.name && props.gameOf.region === props.match.params.region) {
+      // same game
       return;
     }
     const summoner = {
@@ -38,6 +42,7 @@ class SummonerGame extends Component {
 export default connect((state) => ({
   loading: state.gameData.loading,
   game: state.gameData.game,
+  gameOf: state.gameData.summoner,
 }), {
   fetchGame,
 })(SummonerGame);
