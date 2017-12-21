@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { addAccount } from '../../reducers/accounts/actions';
+import styles from './Home.css';
 
 class Home extends Component {
   addSummoner = (e) => {
     e.preventDefault();
-    this.props.push(`${this.summonerRegionEl.value}/game/${this.summonerNameEl.value}`);
+    const summoner = {
+      region: this.summonerRegionEl.value,
+      name: this.summonerNameEl.value,
+    };
+    this.props.addAccount(summoner);
+    this.goToSummonerGame(summoner);
+  }
+
+  goToSummonerGame = (summoner) => {
+    this.props.push(`${summoner.region}/game/${summoner.name}`);
   }
 
   render() {
     return (
       <div>
+        <div>
+          <h3>Saved accounts</h3>
+          {this.props.accounts.map((account) => (
+            <p
+              key={account.name}
+              onClick={() => this.goToSummonerGame(account)}
+              className={styles.savedAccount}
+            >
+              {account.name} - {account.region}
+            </p>
+          ))}
+        </div>
+
         <form onSubmit={this.addSummoner}>
           <h4>View your stats</h4>
           <input type="text" name="summoner" required placeholder="Your summoner name" ref={(el) => { this.summonerNameEl = el; }} />
@@ -36,6 +60,9 @@ class Home extends Component {
   }
 }
 
-export default connect(null, {
+export default connect((state) => ({
+  accounts: state.accounts.accounts,
+}), {
   push,
+  addAccount,
 })(Home);

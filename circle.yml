@@ -1,0 +1,12 @@
+machine:
+  node:
+    version: 9.3.0
+test:
+  override:
+    - npm run build
+deployment:
+  prod:
+    branch: master
+    commands:
+      - aws s3 sync ./build s3://web.teamward.xyz --cache-control max-age=31556926,public --exclude index.html --metadata-directive REPLACE
+      - aws s3 cp ./build/index.html s3://web.teamward.xyz/index.html --cache-control max-age=no-cache --metadata-directive REPLACE
