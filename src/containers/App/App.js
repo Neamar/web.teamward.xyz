@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Header from '../../components/Header/Header';
 import Home from '../Home/Home';
 import SummonerGame from '../SummonerGame/SummonerGame';
