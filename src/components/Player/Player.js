@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import mastery7 from './images/champion_mastery_7.png'
 
 class Player extends Component {
   render() {
@@ -12,6 +13,9 @@ class Player extends Component {
         <span>{player.summoner.name}</span>
         <span>{player.champion.name}</span>
         <span>lvl. {player.summoner.level}</span>
+        <img src={mastery7} alt={"Champion mastery level " + player.champion.mastery} />
+        { player.current_season_rank.tier && <img src={"images/tier_" + player.current_season_rank.tier.toLowerCase()} alt={player.current_season_rank.tier} />}
+
       </div>
     );
   }
